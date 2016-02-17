@@ -1,13 +1,24 @@
 angular.module('bleTest.services', [])
 .factory("BleServices",function(){
-  var heartRate = {
+  var scPairs={
+    heartRate: {
       service: '180d',
       measurement: '2a37'
-  };
-  
+    },
+    ledService: {
+      service:"19B10000-E8F2-537E-4F6C-D104768A1214",
+      measurement:"19B55555-E8F2-537E-4F6C-D104768A1214"
+    }
+  }
+
+  var peri;
+  var scP;
+
   var app={
-    initialize: function() {
-      app.bindEvents();
+    initialize: function(scPair) {
+      scP=scPairs[scPair];
+      //console.log(this.scPair);
+      //app.bindEvents();
     },
     bindEvents: function() {
       document.addEventListener('deviceready', app.onDeviceReady, false);
@@ -16,59 +27,57 @@ angular.module('bleTest.services', [])
       app.scan();
     },
     scan: function() {
-      app.status("Scanning for Heart Rate Monitor");
+      this.status("Scanning for Heart Rate Monitor");
 
-      var foundHeartRateMonitor = false;
-
-      function onScan(peripheral) {
+      //var foundHeartRateMonitor = false;
+      var me=this;
+      //function onScan(peripheral) {
           // this is demo code, assume there is only one heart rate monitor
-          console.log("Found " + JSON.stringify(peripheral));
-          foundHeartRateMonitor = true;
+          //console.log("Found " + JSON.stringify(peripheral));
+          //foundHeartRateMonitor = true;
 
-          ble.connect(peripheral.id, app.onConnect, app.onDisconnect);
-      }
+          //ble.connect(peripheral.id, this.onConnect, this.onDisconnect);
+     // }
 
       function scanFailure(reason) {
           alert("BLE Scan Failed");
       }
+      ble.scan([], 5, this.onScan, scanFailure);
 
-      ble.scan([heartRate.service], 5, onScan, scanFailure);
-
-      setTimeout(function() {
+      /*setTimeout(function() {
           if (!foundHeartRateMonitor) {
-              app.status("Did not find a heart rate monitor.");
+              alert("Did not find a heart rate monitor.");
           }
-      }, 5000);
+      }, 5000);*/
     },
-    onConnect: function(peripheral) {
-      app.status("Connected to " + peripheral.id);
-      ble.startNotification(peripheral.id, heartRate.service, heartRate.measurement, app.onData, app.onError);
+    connect: function(id){
+      var me=this;
+      ble.connect(id, 
+        function(peripheral){
+          peri=peripheral;
+          me.onConnect(peripheral);
+        }, 
+        function(reason){
+          peri=null;
+          me.onDisconnect(reason);
+        });
     },
-    onDisconnect: function(reason) {
-      alert("Disconnected " + reason);
-      beatsPerMinute.innerHTML = "...";
-      app.status("Disconnected");
+    readData: function() {
+      ble.read(peri.id, scP.service, scP.measurement,this.onReadData,this.onError);
     },
-    onData: function(buffer) {
-      // assuming heart rate measurement is Uint8 format, real code should check the flags
-      // See the characteristic specs http://goo.gl/N7S5ZS
-      var data = new Uint8Array(buffer);
-      beatsPerMinute.innerHTML = data[1];
+    writeData: function(value) {
+      ble.write(peri.id, scP.service, scP.measurement,value,this.readData,this.onError);
     },
-    onError: function(reason) {
-      alert("There was an error " + reason);
-    },
-    status: function(message) {
-      console.log(message);
-      statusDiv.innerHTML = message;
-    }
 
   };
 
-  return {
+  return app;/*{
     initialize: app.initialize,
-    
-  };
+    scan: app.scan,
+    connect: app.connect,
+    readData: app.readData,
+    writeData: app.writeData
+  };*/
 
 })
 

@@ -23,10 +23,39 @@
         <title>Heart Rate</title>
     </head>
     <body ng-controller="HeartRateDisplay">
+
         <div>
-            <h2>BLE Heart Rate Demo</h2>
-            <h1 ng-model="heartRate" id="beatsPerMinute">...</h1>
-            <div id="statusDiv"></div>
+            <ion-header-bar>
+                <h1 class="title">BLE Heart Rate Demo</h1>
+                <button class="button button-positive" ng-click="connectClicked()">
+                    {{connectStatus == false ? "Connect" : "Disconnect" }}
+                </button>
+            </ion-header-bar>
+            <ion-content>
+                <h1 id="beatsPerMinute">{{bleData}}</h1>
+                <div id="statusDiv">{{statusMsg}}</div>
+                <ion-list>
+                    <label class="item item-input">
+                        <input type="text" ng-model="msg" placeholder="Message"/>
+                    </label>
+                </ion-list>
+                <button class="button button-block button-positive" ng-click="sendMsg()" >send </button>
+                <button class="button button-block button-positive" ng-click="readVal()" >read </button>
+            </ion-content>
         </div>
+        <script id="bleSelector.html" type="text/ng-template">
+          <ion-modal-view>
+            <ion-header-bar>
+              <h3 class="title">Connect to BLE device</h3>
+            </ion-header-bar>
+            <ion-content>
+              <ion-list>
+                <ion-item ng-repeat="ble in bles" ng-click="connectBle(ble,$index)">
+                    {{ble.id}} {{ble.name}}
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ion-modal-view>
+        </script>
     </body>
 </html>
