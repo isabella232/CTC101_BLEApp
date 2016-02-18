@@ -1,16 +1,19 @@
 angular.module('bleTest.controllers', [])
 
-.controller("HeartRateDisplay",function($scope ,BleServices){
+.controller("MessageDisplay",function($scope ,BleServices){
     BleServices.onReadData=showString;
+    //BleServices.onData=onData;
 
     BleServices.initialize("ledService");
     
     //$scope.ledVal=0;
-
+    $scope.formData={};
+    $scope.bleData="";
+    //$scope.statusMsg="";
 
     $scope.sendMsg=function(){
-      var data=str2ab(this.msg);
-      //console.log(this.msg);
+      var data=str2ab($scope.formData.msg);
+      //console.log(this);
     	BleServices.writeData(data);
       
       function str2ab(str) {
@@ -23,9 +26,8 @@ angular.module('bleTest.controllers', [])
       }
     }
     $scope.readVal=function(){
-      //var val=BleServices.readData();
-      console.log($scope.msg);
-      $scope.bleData = $scope.msg;
+      BleServices.readData();
+      //console.log($scope.formData.msg);
     }
 
 
@@ -40,19 +42,15 @@ angular.module('bleTest.controllers', [])
     function showString(buffer){
       //console.log(buffer);
       var data=ab2str(buffer);
-      $scope.bleData = data;
-      //beatsPerMinute.innerHTML=data;
+      console.log(data);
+      
+      $scope.$apply(function(){
+        $scope.bleData = data;
+      });
 
       function ab2str(buf) {
         return String.fromCharCode.apply(null, new Uint8Array(buf));
       }
     }
-
-
-
-
-
-
-    
 });
 

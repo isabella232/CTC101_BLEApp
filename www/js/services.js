@@ -63,10 +63,13 @@ angular.module('bleTest.services', [])
         });
     },
     readData: function() {
+      console.log("blabla");
       ble.read(peri.id, scP.service, scP.measurement,this.onReadData,this.onError);
+      console.log("blabla2");
     },
     writeData: function(value) {
-      ble.write(peri.id, scP.service, scP.measurement,value,this.readData,this.onError);
+      var me=this;
+      ble.write(peri.id, scP.service, scP.measurement,value,function(){me.readData();},this.onError);
     },
 
   };

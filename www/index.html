@@ -2,7 +2,7 @@
 <html ng-app="bleTest">
     <head>
         <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
+        <!--<meta name="format-detection" content="telephone=no" />-->
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link href="css/ionic.app.css" rel="stylesheet">
@@ -22,27 +22,30 @@
 
         <title>Heart Rate</title>
     </head>
-    <body ng-controller="HeartRateDisplay">
+    <body ng-controller="MessageDisplay">
 
         <div>
             <ion-header-bar>
-                <h1 class="title">BLE Heart Rate Demo</h1>
+                <h1 class="title">BLE Messenger</h1>
                 <button class="button button-positive" ng-click="connectClicked()">
-                    {{connectStatus == false ? "Connect" : "Disconnect" }}
+                    {{connectStatus==false?"connect":"disconnect"}}
                 </button>
             </ion-header-bar>
             <ion-content>
-                <h1 id="beatsPerMinute">{{bleData}}</h1>
+                <h1 id="dataDisplay">{{bleData}}</h1>
                 <div id="statusDiv">{{statusMsg}}</div>
                 <ion-list>
                     <label class="item item-input">
-                        <input type="text" ng-model="msg" placeholder="Message"/>
+                        <input type="text" ng-model="formData.msg" placeholder="Message"/>
                     </label>
                 </ion-list>
                 <button class="button button-block button-positive" ng-click="sendMsg()" >send </button>
                 <button class="button button-block button-positive" ng-click="readVal()" >read </button>
             </ion-content>
         </div>
+
+
+
         <script id="bleSelector.html" type="text/ng-template">
           <ion-modal-view>
             <ion-header-bar>
