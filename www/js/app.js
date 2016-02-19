@@ -138,5 +138,15 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
       alert("There was an error " + reason);
     }
   });
-});
+})
 
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+
+  .state("app",{
+    url:"/app",
+    abstract:true,
+    templateUrl: "templates/baseTemplate.html",
+    controller:"appController"
+  })
+})

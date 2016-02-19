@@ -1,5 +1,8 @@
 angular.module('bleTest.controllers', [])
 
+.controller("appController",function(){
+
+})
 .controller("MessageDisplay",function($scope ,BleServices){
     BleServices.onReadData=showString;
     //BleServices.onData=onData;

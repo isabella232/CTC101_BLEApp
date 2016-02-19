@@ -1,0 +1,12 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h3 class="title">Connect to BLE device</h3>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="ble in bles" ng-click="connectBle(ble,$index)">
+          {{ble.id}} {{ble.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
