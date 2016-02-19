@@ -9,8 +9,12 @@ angular.module('bleTest.controllers', [])
     //$scope.ledVal=0;
     $scope.formData={};
     $scope.bleData="";
-    //$scope.statusMsg="";
 
+    /*
+    * Send a string to a ble device
+    *
+    *
+    */
     $scope.sendMsg=function(){
       var data=str2ab($scope.formData.msg);
       //console.log(this);
@@ -25,20 +29,21 @@ angular.module('bleTest.controllers', [])
         return buf;
       }
     }
+
+    /*
+    * Request value from a ble device
+    *
+    *
+    */
     $scope.readVal=function(){
       BleServices.readData();
       //console.log($scope.formData.msg);
     }
-
-
-/*
-    function onData(buffer) {
-      // assuming heart rate measurement is Uint8 format, real code should check the flags
-      // See the characteristic specs http://goo.gl/N7S5ZS
-      var data = new Uint8Array(buffer);
-      //beatsPerMinute.innerHTML = data[1];
-    }
-*/
+    /*
+    * Display buffer data to frontend
+    *
+    *
+    */
     function showString(buffer){
       //console.log(buffer);
       var data=ab2str(buffer);
@@ -52,5 +57,49 @@ angular.module('bleTest.controllers', [])
         return String.fromCharCode.apply(null, new Uint8Array(buf));
       }
     }
-});
+})
 
+.controller("tamagotchi",function($scope,BleServices){
+  var tamagotchiService={
+    service:"361dbb0c-0193-49dd-93af-753ab760a344",
+    foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
+    playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
+    cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
+  }
+  
+  BleServices.onConnect=onConnect;
+  //$scope.foodChari=30;
+  function onConnect(peripheral){
+    console.log("start notification");
+    _.map(["foodChari","playChari","cleanChari"],
+      function(chari){
+        BleServices.startNotification(
+          peripheral,
+          tamagotchiService.service,
+          tamagotchiService[chari],
+          _.partial(onData,_,chari),
+          onError);
+      }
+    );
+    
+  }
+
+  function onData(buffer,chariName){
+    var data = new Uint8Array(buffer);
+    console.log(chariName+" "+data[1]);
+
+    $scope.$apply(function(){
+      $scope[chariName]=data[1];
+    });
+  }
+
+  /*
+  * Event handler for when a ble error occurs
+  *
+  *
+  */
+  function onError(reason) {
+    alert("There was an error " + reason);
+  }
+
+});

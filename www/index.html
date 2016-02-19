@@ -13,6 +13,9 @@
         <!-- cordova script (this will be a 404 during development) -->
         <script src="cordova.js"></script>
 
+        <!-- lodash js -->
+        <script src="lib/lodash/lodash.js"></script>
+
         <!-- your app's js -->
         
         <script src="js/app.js"></script>
@@ -22,7 +25,7 @@
 
         <title>Heart Rate</title>
     </head>
-    <body ng-controller="MessageDisplay">
+    <body ng-controller="tamagotchi">
 
         <div>
             <ion-header-bar>
@@ -34,6 +37,9 @@
             <ion-content>
                 <h1 id="dataDisplay">{{bleData}}</h1>
                 <div id="statusDiv">{{statusMsg}}</div>
+                <div class="progressBar" id="foodLV"><div class="inner" style="width:{{foodChari}}%;"></div></div>
+                <div class="progressBar" id="playLV"><div class="inner" style="width:{{playChari}}%;"></div></div>
+                <div class="progressBar" id="cleanLV"><div class="inner" style="width:{{cleanChari}}%;"></div></div>
                 <ion-list>
                     <label class="item item-input">
                         <input type="text" ng-model="formData.msg" placeholder="Message"/>

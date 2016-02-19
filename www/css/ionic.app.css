@@ -9730,3 +9730,30 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.progressBar {
+  border: 1px solid;
+  height: 30px;
+  margin: 10px 0;
+  padding: 2px; }
+
+.progressBar#foodLV {
+  border-color: red; }
+
+.progressBar#playLV {
+  border-color: green; }
+
+.progressBar#cleanLV {
+  border-color: blue; }
+
+.progressBar .inner {
+  height: 100%; }
+
+.progressBar#foodLV .inner {
+  background-color: red; }
+
+.progressBar#playLV .inner {
+  background-color: green; }
+
+.progressBar#cleanLV .inner {
+  background-color: blue; }

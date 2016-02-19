@@ -35,7 +35,7 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     });
 
 
-    BleServices.onConnect=onConnect;
+    //BleServices.onConnect=onConnect;
     BleServices.onScan=onScan;
     BleServices.onDisconnect=onDisconnect;
     BleServices.onError=onError;

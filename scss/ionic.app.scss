@@ -21,3 +21,32 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.progressBar{
+	border:1px solid;
+	height:30px;
+	margin:10px 0;
+	padding:2px;
+}
+
+.progressBar#foodLV{
+	border-color:red;
+}
+.progressBar#playLV{
+	border-color:green;
+}
+.progressBar#cleanLV{
+	border-color:blue;
+}
+
+.progressBar .inner{
+	height:100%;
+}
+.progressBar#foodLV .inner{
+	background-color:red;
+}
+.progressBar#playLV .inner{
+	background-color:green;
+}
+.progressBar#cleanLV .inner{
+	background-color:blue;
+}
