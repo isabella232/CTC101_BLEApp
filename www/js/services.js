@@ -28,7 +28,7 @@ angular.module('bleTest.services', [])
     },
 
 
-    scan: function() {
+    scan: function(onScan) {
       this.status("Scanning for Heart Rate Monitor");
 
       var me=this;
@@ -36,7 +36,7 @@ angular.module('bleTest.services', [])
       function scanFailure(reason) {
           alert("BLE Scan Failed");
       }
-      ble.scan([], 5, this.onScan, scanFailure);
+      ble.scan([], 5, onScan, scanFailure);
 
       /*setTimeout(function() {
           if (!foundHeartRateMonitor) {
@@ -44,31 +44,17 @@ angular.module('bleTest.services', [])
           }
       }, 5000);*/
     },
-    connect: function(id){
-      var me=this;
-      ble.connect(id, 
-        function(peripheral){
-          peri=peripheral;
-          me.onConnect(peripheral);
-        }, 
-        function(reason){
-          peri=null;
-          me.onDisconnect(reason);
-        });
+    connect: function(id,onConnect,onDisconnect){
+      ble.connect(id, onConnect, onDisconnect);
     },
     startNotification: function(peripheral,serviceID,charicaristicID, onData, onError){
-      ble.startNotification(peripheral.id, serviceID, charicaristicID,onData,onError);
+      ble.startNotification(peripheral.id, serviceID, charicaristicID, onData, onError);
     },
-    readData: function() {
-      ble.read(peri.id, scP.service, scP.measurement,this.onReadData,this.onError);
+    readData: function(id,scPair,onReadData,onError) {
+      ble.read(id, scPair.service, scPair.measurement, onReadData, onError);
     },
-    writeData: function(value) {
-      var me=this;
-      ble.write(peri.id, scP.service, scP.measurement,value,
-        function(){
-          me.readData();
-        },
-      this.onError);
+    writeData: function(id,value,scPair,onWriteData,onError) {
+      ble.write(id, scPair.service, scPair.measurement, value, onWriteData, onError);
     },
 
   };

@@ -4,7 +4,7 @@
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="ble in bles" ng-click="connectBle(ble,$index)">
+      <ion-item ng-repeat="ble in bles" ng-click="bleClicked(ble,$index)">
           {{ble.id}} {{ble.name}}
       </ion-item>
     </ion-list>

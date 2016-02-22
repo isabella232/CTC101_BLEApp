@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
 
-.run(function($rootScope, $ionicPlatform, $ionicModal ,BleServices) {
+.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,123 +20,6 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-   
-
-    /*
-    * Create modal for connect/disconnect ble devices
-    *
-    *
-    */
-    $ionicModal.fromTemplateUrl('bleSelector.html', {
-      scope: $rootScope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $rootScope.bleSelectModal = modal;
-    });
-
-
-    //BleServices.onConnect=onConnect;
-    BleServices.onScan=onScan;
-    BleServices.onDisconnect=onDisconnect;
-    BleServices.onError=onError;
-    BleServices.status=status;
-
-    $rootScope.bles=[];
-    $rootScope.connectStatus=false;
-    $rootScope.connectedDevice;
-
-
-    /*
-    * Event handle for when the connect button is clicked
-    *
-    *
-    */
-    $rootScope.connectClicked=function(){
-      if($rootScope.connectStatus==false){
-        $rootScope.bles=[];
-        BleServices.scan();
-        $rootScope.openBleModal();
-      }else{
-        console.log("disconnect");
-      }
-    }
-    /*
-    * Open the ble list modal
-    *
-    *
-    */
-    $rootScope.openBleModal=function(){
-      $rootScope.bleSelectModal.show();
-    }
-    /*
-    * close the ble list modal
-    *
-    *
-    */
-    $rootScope.closeBleModal=function(){
-      $rootScope.bleSelectModal.hide();
-    }
-
-    /*
-    * Connect to a ble device
-    *
-    *
-    */
-    $rootScope.connectBle=function(ble,index){
-      //console.log(ble,index);
-      BleServices.connect(ble.id);
-      $rootScope.closeBleModal();
-    }
-
-    /*
-    * Displaying a status message
-    *
-    *
-    */
-    function status(message) {
-      console.log(message);
-      //statusDiv.innerHTML = message;
-      $rootScope.statusMsg=message;
-    }
-    /*
-    * Event handler for ble.scan, keep the list of 
-    * available devices
-    *
-    */
-    function onScan(peripheral) {
-      //console.log(peripheral);
-      $rootScope.$apply(function(){
-        $rootScope.bles.push(peripheral);
-      });
-    }
-    /*
-    * Event handler for ble.connect
-    *
-    *
-    */
-    function onConnect(peripheral) {
-      status("Connected to " + peripheral.id);
-      //console.log(peripheral);
-      //ble.startNotification(peripheral.id, app.scPair.service, app.scPair.measurement, app.onData, app.onError);
-    }
-    /*
-    * Event handler for when ble is disconnected 
-    *
-    *
-    */
-    function onDisconnect(reason) {
-      alert("Disconnected " + reason);
-      //beatsPerMinute.innerHTML = "...";
-      status("Disconnected");
-    }
-    /*
-    * Event handler for when a ble error occurs
-    *
-    *
-    */
-    function onError(reason) {
-      alert("There was an error " + reason);
-    }
   });
 })
 
@@ -147,6 +30,37 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     url:"/app",
     abstract:true,
     templateUrl: "templates/baseTemplate.html",
-    controller:"appController"
+    controller:"AppController"
   })
+
+  .state("app.Tamagotchi",{
+    url:"/tamagotchi",
+    views:{
+      "content":{
+        templateUrl: "templates/Tamagotchi.html",
+        controller:"Tamagotchi"  
+      }
+    }
+  })
+
+  .state("app.BleMessenger",{
+    url:"/blemessenger",
+    views:{
+      "content":{
+        templateUrl: "templates/BleMessenger.html",
+        controller:"BleMessenger"
+      }
+    }
+  })
+
+  .state("app.Test",{
+    url:"/test",
+    views:{
+      "content":{
+        templateUrl:"templates/TestView.html"
+      }
+    }
+  });
+
+  $urlRouterProvider.otherwise('/app/tamagotchi');
 })
