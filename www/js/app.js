@@ -53,6 +53,16 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   })
 
+  .state("app.BleRobot",{
+    url:"/blerobot",
+    views:{
+      "content":{
+        templateUrl: "templates/BleRobot.html",
+        controller:"LogoRobot"
+      }
+    }
+  })
+
   .state("app.Test",{
     url:"/test",
     views:{
