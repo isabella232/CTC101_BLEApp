@@ -24,7 +24,7 @@ angular.module('bleTest.controllers')
         );
       }
     );
-    
+    console.log("Tamagotchi connected");
   }
 
   function onData(buffer,chariName){

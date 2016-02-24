@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,9 +21,29 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
       StatusBar.styleDefault();
     }
   });
+
+})
+.constant("BleDefs",{
+  LogoRobotService: {
+    state:"app.BleRobot",
+    service:"19f82bd2-da79-11e5-b5d2-0a1d41d68578",
+    measurement:"19f82bd2-da79-11e5-b5d2-0a1d41d68579"
+  },
+  MessengerService: {
+    state:"app.BleMessenger",
+    service:"19b10000-e8f2-537e-4f6c-d104768a1214",
+    measurement:"19b10001-e8f2-537e-4f6c-d104768a1214"
+  },
+  tamagotchiService: { 
+    state:"app.Tamagotchi",
+    service:"361dbb0c-0193-49dd-93af-753ab760a344",
+    foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
+    playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
+    cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
+  }
 })
 
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider,BleDefs){
   $stateProvider
 
   .state("app",{
@@ -33,7 +53,7 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     controller:"AppController"
   })
 
-  .state("app.Tamagotchi",{
+  .state(BleDefs.tamagotchiService.state,{
     url:"/tamagotchi",
     views:{
       "content":{
@@ -43,7 +63,7 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   })
 
-  .state("app.BleMessenger",{
+  .state(BleDefs.MessengerService.state,{
     url:"/blemessenger",
     views:{
       "content":{
@@ -53,7 +73,7 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   })
 
-  .state("app.BleRobot",{
+  .state(BleDefs.LogoRobotService.state,{
     url:"/blerobot",
     views:{
       "content":{
@@ -72,5 +92,5 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   });
 
-  $urlRouterProvider.otherwise('/app/tamagotchi');
+  $urlRouterProvider.otherwise('/app/blemessenger');
 })

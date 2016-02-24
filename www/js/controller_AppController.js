@@ -1,6 +1,6 @@
 angular.module('bleTest.controllers',[])
 
-.controller("AppController",function($scope, $ionicModal, BleServices){
+.controller("AppController",function($scope, $ionicModal, $state, BleServices, BleDefs){
   /*
   * Create modal for connect/disconnect ble devices
   *
@@ -18,7 +18,6 @@ angular.module('bleTest.controllers',[])
   $scope.bles=[];
   $scope.connectStatus=false;
   $scope.connectedDevice;
-
 
   /*
   * Event handle for when the connect button is clicked
@@ -64,7 +63,20 @@ angular.module('bleTest.controllers',[])
     //$scope.connectBle(ble.id);
     $scope.closeBleModal();
   }
-
+/*
+  $scope.changeState=function(){
+    var peripheral={};
+    peripheral.services=["1800","1801","19B10000-E8F2-537E-4F6C-D104768A1214"];
+    var service=_.pickBy(BleDefs, function(value,key){
+      //value.service is included in peripheral.services 
+      return _.includes(peripheral.services,value.service);
+    });
+    //console.log(service);
+    var stateToGo=_.values(service)[0].state
+    //console.log(stateToGo);
+    $state.go(stateToGo)
+  }
+*/
   /*
   * Displaying a status message
   *
@@ -94,7 +106,20 @@ angular.module('bleTest.controllers',[])
   function onConnect(peripheral) {
     status("Connected to " + peripheral.id);
     $scope.peripheral=peripheral;
-    $scope.$broadcast("onConnectBLE",peripheral);
+    //console.log(peripheral);
+    
+    var service=_.pickBy(BleDefs, function(value,key){
+      //value.service is included in peripheral.services 
+      return _.includes(peripheral.services,value.service);
+    });
+    //console.log(service);
+    var stateToGo=_.values(service)[0].state;
+    //console.log(stateToGo);
+    $state.go(stateToGo).then(function(){
+      $scope.$broadcast("onConnectBLE",peripheral);
+    });
+    
+    
   }
   /*
   * Event handler for when ble is disconnected 

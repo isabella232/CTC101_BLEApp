@@ -1,9 +1,9 @@
 angular.module("bleTest.controllers")
 
 .controller("LogoRobot",function($scope, BleServices, UtilServices){
-  var MessengerService= {
-    service:"19B10000-E8F2-537E-4F6C-D104768A1214",
-    measurement:"19B10001-E8F2-537E-4F6C-D104768A1214"
+  var LogoRobotService= {
+    service:"19f82bd2-da79-11e5-b5d2-0a1d41d68578",
+    measurement:"19f82bd2-da79-11e5-b5d2-0a1d41d68579"
   }
 
 	var commandList={
@@ -26,7 +26,7 @@ angular.module("bleTest.controllers")
 		var cmdString=_.join(_.map($scope.logoCommands,"code"),"");
 		console.log(cmdString);
 		var data=UtilServices.str2ab(cmdString);
-  	BleServices.writeData($scope.peripheral.id, data, MessengerService, onWrite);
+  	BleServices.writeData($scope.peripheral.id, data, LogoRobotService, onWrite);
 		isSent=true;
 	}
 

@@ -1,7 +1,6 @@
 angular.module('bleTest.services', [])
 .factory("BleServices",function(){
   var app={
-    
     scan: function(onScan) {
       this.status("Scanning for Heart Rate Monitor");
 
