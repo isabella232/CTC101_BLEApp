@@ -1,33 +1,7 @@
 angular.module('bleTest.services', [])
 .factory("BleServices",function(){
-  var scPairs={
-    heartRate: {
-      service: '180d',
-      measurement: '2a37'
-    },
-    ledService: {
-      service:"19B10000-E8F2-537E-4F6C-D104768A1214",
-      measurement:"19B55555-E8F2-537E-4F6C-D104768A1214"
-    }
-  }
-
-  var peri;
-  var scP;
-
   var app={
-    initialize: function(scPair) {
-      scP=scPairs[scPair];
-    },
-
-
-    bindEvents: function() {
-      document.addEventListener('deviceready', app.onDeviceReady, false);
-    },
-    onDeviceReady: function() {
-      app.scan();
-    },
-
-
+    
     scan: function(onScan) {
       this.status("Scanning for Heart Rate Monitor");
 
@@ -48,14 +22,18 @@ angular.module('bleTest.services', [])
       ble.connect(id, onConnect, onDisconnect);
     },
     startNotification: function(peripheral,serviceID,charicaristicID, onData, onError){
-      ble.startNotification(peripheral.id, serviceID, charicaristicID, onData, onError);
+      ble.startNotification(peripheral.id, serviceID, charicaristicID, onData, this.onError);
     },
     readData: function(id,scPair,onReadData,onError) {
-      ble.read(id, scPair.service, scPair.measurement, onReadData, onError);
+      ble.read(id, scPair.service, scPair.measurement, onReadData, this.onError);
     },
     writeData: function(id,value,scPair,onWriteData,onError) {
-      ble.write(id, scPair.service, scPair.measurement, value, onWriteData, onError);
+      ble.write(id, scPair.service, scPair.measurement, value, onWriteData, this.onError);
     },
+
+    onError: function(reason){
+      alert("error "+reason);
+    }
 
   };
 
@@ -63,4 +41,20 @@ angular.module('bleTest.services', [])
 
 })
 
+.factory("UtilServices",function(){
+  return {
+    ab2str: function(buff){
+      return String.fromCharCode.apply(null, new Uint8Array(buff));
+    },
 
+    str2ab: function(str){
+      var buf = new ArrayBuffer(str.length+1); // 2 bytes for each char
+      var bufView = new Uint8Array(buf);
+      for (var i=0, strLen=str.length; i<strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+      }
+      bufView[i]=0;
+      return buf;
+    }
+  }
+})
