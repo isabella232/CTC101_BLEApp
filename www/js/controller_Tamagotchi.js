@@ -20,8 +20,8 @@ angular.module('bleTest.controllers')
           peripheral,
           tamagotchiService.service,
           tamagotchiService[chari],
-          _.partial(onData,_,chari),
-          onError);
+          _.partial(onData,_,chari)
+        );
       }
     );
     
@@ -35,14 +35,4 @@ angular.module('bleTest.controllers')
       $scope[chariName]=data[1];
     });
   }
-
-  /*
-  * Event handler for when a ble error occurs
-  *
-  *
-  */
-  function onError(reason) {
-    alert("There was an error " + reason);
-  }
-
 });

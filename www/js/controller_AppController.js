@@ -13,10 +13,6 @@ angular.module('bleTest.controllers',[])
     $scope.bleSelectModal = modal;
   });
 
-  //BleServices.onConnect=onConnect;
-  //BleServices.onScan=onScan;
-  //BleServices.onDisconnect=onDisconnect;
-  //BleServices.onError=onError;
   BleServices.status=status;
 
   $scope.bles=[];
