@@ -1,14 +1,9 @@
 angular.module('bleTest.controllers')
 
 
-.controller("Tamagotchi",function($scope, BleServices){
-  var tamagotchiService={
-    service:"361dbb0c-0193-49dd-93af-753ab760a344",
-    foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
-    playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
-    cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
-  }
-  
+.controller("Tamagotchi",function($scope, BleServices, BleDefs){
+  var tamagotchiService=BleDefs.tamagotchiService;
+
   $scope.$on("onConnectBLE",function(e,peripheral){
     onConnect(peripheral);
   });

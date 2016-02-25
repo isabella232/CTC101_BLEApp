@@ -1,10 +1,7 @@
 angular.module('bleTest.controllers')
 
-.controller("BleMessenger",function($scope ,BleServices, UtilServices){
-  var MessengerService= {
-    service:"19B10000-E8F2-537E-4F6C-D104768A1214",
-    measurement:"19B10001-E8F2-537E-4F6C-D104768A1214"
-  }
+.controller("BleMessenger",function($scope ,BleServices, UtilServices, BleDefs){
+  var MessengerService=BleDefs.MessengerService;
 
   $scope.formData={};
   $scope.bleData="";

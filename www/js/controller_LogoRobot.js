@@ -1,10 +1,7 @@
 angular.module("bleTest.controllers")
 
-.controller("LogoRobot",function($scope, BleServices, UtilServices){
-  var LogoRobotService= {
-    service:"19f82bd2-da79-11e5-b5d2-0a1d41d68578",
-    measurement:"19f82bd2-da79-11e5-b5d2-0a1d41d68579"
-  }
+.controller("LogoRobot",function($scope, BleServices, UtilServices, BleDefs){
+  var LogoRobotService=BleDefs.LogoRobotService;
 
 	var commandList={
 		"up":1,
