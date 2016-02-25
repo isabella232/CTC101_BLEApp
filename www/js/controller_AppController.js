@@ -16,8 +16,7 @@ angular.module('bleTest.controllers',[])
   BleServices.status=status;
 
   $scope.bles=[];
-  $scope.connectStatus=false;
-  $scope.connectedDevice;
+  $scope.peripheral=undefined;
 
   /*
   * Event handle for when the connect button is clicked
@@ -26,12 +25,13 @@ angular.module('bleTest.controllers',[])
   */
   
   $scope.connectClicked=function(){
-    if($scope.connectStatus==false){
+    if(_.isUndefined($scope.peripheral)){
       $scope.bles=[];
       BleServices.scan(onScan);
       $scope.openBleModal();
     }else{
-      console.log("disconnect");
+      //console.log("disconnect");
+      disconnectDevice();
     }
   }
   
@@ -63,20 +63,6 @@ angular.module('bleTest.controllers',[])
     //$scope.connectBle(ble.id);
     $scope.closeBleModal();
   }
-/*
-  $scope.changeState=function(){
-    var peripheral={};
-    peripheral.services=["1800","1801","19B10000-E8F2-537E-4F6C-D104768A1214"];
-    var service=_.pickBy(BleDefs, function(value,key){
-      //value.service is included in peripheral.services 
-      return _.includes(peripheral.services,value.service);
-    });
-    //console.log(service);
-    var stateToGo=_.values(service)[0].state
-    //console.log(stateToGo);
-    $state.go(stateToGo)
-  }
-*/
   /*
   * Displaying a status message
   *
@@ -113,13 +99,19 @@ angular.module('bleTest.controllers',[])
       return _.includes(peripheral.services,value.service);
     });
     //console.log(service);
-    var stateToGo=_.values(service)[0].state;
+    var stateToGo=_.get(_.head(_.values(service)),"state");
     //console.log(stateToGo);
+
     $state.go(stateToGo).then(function(){
       $scope.$broadcast("onConnectBLE",peripheral);
     });
     
-    
+  }
+
+  function disconnectDevice(device){
+    if(_.isUndefined(device))device=$scope.peripheral;
+
+    BleServices.disconnect(device.id,onDisconnect);
   }
   /*
   * Event handler for when ble is disconnected 
@@ -127,8 +119,10 @@ angular.module('bleTest.controllers',[])
   *
   */
   function onDisconnect(reason) {
-    alert("Disconnected " + reason);
+    //alert("Disconnected " + reason);
     status("Disconnected");
+    $scope.peripheral=undefined;
+    $state.go("app.welcome");
   }
   /*
   * Event handler for when a ble error occurs

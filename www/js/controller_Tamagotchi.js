@@ -17,7 +17,7 @@ angular.module('bleTest.controllers')
     _.map(["foodChari","playChari","cleanChari"],
       function(chari){
         BleServices.startNotification(
-          peripheral,
+          peripheral.id,
           tamagotchiService.service,
           tamagotchiService[chari],
           _.partial(onData,_,chari)

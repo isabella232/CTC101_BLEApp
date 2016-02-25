@@ -82,7 +82,14 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
       }
     }
   })
-
+  .state("app.welcome", {
+    url:"/welcome",
+    views:{
+      "content":{
+        templateUrl: "templates/Welcome.html",
+      }
+    }
+  })
   .state("app.Test",{
     url:"/test",
     views:{
@@ -92,5 +99,5 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   });
 
-  $urlRouterProvider.otherwise('/app/blemessenger');
+  $urlRouterProvider.otherwise('/app/welcome');
 })

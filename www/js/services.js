@@ -20,8 +20,11 @@ angular.module('bleTest.services', [])
     connect: function(id,onConnect,onDisconnect){
       ble.connect(id, onConnect, onDisconnect);
     },
-    startNotification: function(peripheral,serviceID,charicaristicID, onData, onError){
-      ble.startNotification(peripheral.id, serviceID, charicaristicID, onData, this.onError);
+    disconnect:function(id,onDisconnect,onError){
+      ble.disconnect(id,onDisconnect,this.onError);
+    },
+    startNotification: function(id,serviceID,charicaristicID, onData, onError){
+      ble.startNotification(id, serviceID, charicaristicID, onData, this.onError);
     },
     readData: function(id,scPair,onReadData,onError) {
       ble.read(id, scPair.service, scPair.measurement, onReadData, this.onError);
