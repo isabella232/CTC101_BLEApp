@@ -40,6 +40,12 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
     playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
     cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
+  },
+  uartService:{
+    state:"",
+    service:"6E400001-B5A3-F393-E0A9-E50E24DCCA9E",
+    txChari:"6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
+    rxChari:"6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
   }
 })
 
