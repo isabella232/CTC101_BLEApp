@@ -2,6 +2,7 @@ angular.module("bleTest.controllers")
 
 .controller("LogoRobot",function($scope, BleServices, UtilServices, BleDefs){
   var LogoRobotService=BleDefs.LogoRobotService;
+  var uartService=BleDefs.uartService;
 
 	var commandList={
 		"up":1,
@@ -23,7 +24,12 @@ angular.module("bleTest.controllers")
 		var cmdString=_.join(_.map($scope.logoCommands,"code"),"");
 		console.log(cmdString);
 		var data=UtilServices.str2ab(cmdString);
-  	BleServices.writeData($scope.peripheral.id, data, LogoRobotService, onWrite);
+  	BleServices.writeData(
+  		$scope.peripheral.id, 
+  		data, 
+  		LogoRobotService.service,
+  		uartService.rxChari,
+  		onWrite);
 		isSent=true;
 	}
 

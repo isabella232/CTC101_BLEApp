@@ -26,11 +26,11 @@ angular.module('bleTest.services', [])
     startNotification: function(id,serviceID,charicaristicID, onData, onError){
       ble.startNotification(id, serviceID, charicaristicID, onData, this.onError);
     },
-    readData: function(id,scPair,onReadData,onError) {
-      ble.read(id, scPair.service, scPair.measurement, onReadData, this.onError);
+    readData: function(id,service,characteristic,onReadData,onError) {
+      ble.read(id, service, characteristic, onReadData, this.onError);
     },
-    writeData: function(id,value,scPair,onWriteData,onError) {
-      ble.write(id, scPair.service, scPair.measurement, value, onWriteData, this.onError);
+    writeData: function(id,value,service,characteristic,onWriteData,onError) {
+      ble.write(id, service, characteristic, value, onWriteData, this.onError);
     },
 
     onError: function(reason){
@@ -50,12 +50,12 @@ angular.module('bleTest.services', [])
     },
 
     str2ab: function(str){
-      var buf = new ArrayBuffer(str.length+1); // 2 bytes for each char
+      var buf = new ArrayBuffer(str.length); // 2 bytes for each char
       var bufView = new Uint8Array(buf);
       for (var i=0, strLen=str.length; i<strLen; i++) {
         bufView[i] = str.charCodeAt(i);
       }
-      bufView[i]=0;
+      //bufView[i]=0;
       return buf;
     }
   }
