@@ -1,7 +1,7 @@
 angular.module("bleTest.controllers")
 
 .controller("LogoRobot",function($scope, BleServices, UtilServices, BleDefs){
-  var LogoRobotService=BleDefs.LogoRobotService;
+  //var LogoRobotService=BleDefs.LogoRobotService;
   var uartService=BleDefs.uartService;
 
 	var commandList={
@@ -27,7 +27,7 @@ angular.module("bleTest.controllers")
   	BleServices.writeData(
   		$scope.peripheral.id, 
   		data, 
-  		LogoRobotService.service,
+  		uartService.service,
   		uartService.rxChari,
   		onWrite);
 		isSent=true;

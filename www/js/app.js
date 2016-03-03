@@ -26,25 +26,29 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
 .constant("BleDefs",{
   LogoRobotService: {
     state:"app.BleRobot",
-    service:"19f82bd2-da79-11e5-b5d2-0a1d41d68578",
-    measurement:"19f82bd2-da79-11e5-b5d2-0a1d41d68579"
+    exampleID:2
+    //service:"19f82bd2-da79-11e5-b5d2-0a1d41d68578",
+    //measurement:"19f82bd2-da79-11e5-b5d2-0a1d41d68579"
   },
   MessengerService: {
     state:"app.BleMessenger",
-    service:"19b10000-e8f2-537e-4f6c-d104768a1214",
-    measurement:"19b10001-e8f2-537e-4f6c-d104768a1214"
+    exampleID:1
+    //service:"19b10000-e8f2-537e-4f6c-d104768a1214",
+    //measurement:"19b10001-e8f2-537e-4f6c-d104768a1214"
   },
   tamagotchiService: { 
     state:"app.Tamagotchi",
-    service:"361dbb0c-0193-49dd-93af-753ab760a344",
-    foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
-    playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
-    cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
+    exampleID:3
+    //service:"361dbb0c-0193-49dd-93af-753ab760a344",
+    //foodChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698d",
+    //playChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698e",
+    //cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
   },
   uartService:{
     service:"6E400001-B5A3-F393-E0A9-E50E24DCCA9E",
     txChari:"6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
-    rxChari:"6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
+    rxChari:"6E400002-B5A3-F393-E0A9-E50E24DCCA9E",
+    typeChari:"6E400004-B5A3-F393-E0A9-E50E24DCCA9E"
   }
 })
 

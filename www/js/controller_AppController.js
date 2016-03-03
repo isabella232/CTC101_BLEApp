@@ -94,18 +94,40 @@ angular.module('bleTest.controllers',[])
     $scope.peripheral=peripheral;
     //console.log(peripheral);
     
+    var uartService=BleDefs.uartService;
+    BleServices.readData(
+      $scope.peripheral.id,
+      uartService.service,
+      uartService.typeChari,
+      changeView
+      )
+  }
+
+  $scope.testStuff=function(){
+    var buffer=new ArrayBuffer(1);
+    var buffview=new Uint8Array(buffer);
+    buffview[0]=-1;
+
+    changeView(buffer);
+  }
+  function changeView(buffer){
+    var viewCode=new Uint8Array(buffer)[0];
+    //console.log(viewCode);
+
     var service=_.pickBy(BleDefs, function(value,key){
       //value.service is included in peripheral.services 
-      return _.includes(peripheral.services,value.service);
+      return value.exampleID==viewCode;
     });
     //console.log(service);
     var stateToGo=_.get(_.head(_.values(service)),"state");
     //console.log(stateToGo);
+    if(_.isUndefined(stateToGo)){
+      stateToGo="app.Test";
+    }
 
     $state.go(stateToGo).then(function(){
-      $scope.$broadcast("onConnectBLE",peripheral);
+      $scope.$broadcast("onConnectBLE",$scope.peripheral);
     });
-    
   }
 
   function disconnectDevice(device){

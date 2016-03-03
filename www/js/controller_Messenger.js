@@ -1,7 +1,7 @@
 angular.module('bleTest.controllers')
 
 .controller("BleMessenger",function($scope ,BleServices, UtilServices, BleDefs){
-  var MessengerService=BleDefs.MessengerService;
+  //var MessengerService=BleDefs.MessengerService;
   var uartService=BleDefs.uartService;
 
   $scope.formData={};
@@ -18,7 +18,7 @@ angular.module('bleTest.controllers')
   	BleServices.writeData(
       $scope.peripheral.id, 
       data, 
-      MessengerService.service,
+      uartService.service,
       uartService.rxChari, 
       $scope.readVal);
     
@@ -30,10 +30,10 @@ angular.module('bleTest.controllers')
   *
   */
   $scope.readVal=function(){
-    console.log($scope.peripheral.id)
+    //console.log($scope.peripheral.id)
     BleServices.readData(
       $scope.peripheral.id, 
-      MessengerService.service,
+      uartService.service,
       uartService.txChari, 
       showString);
     //console.log($scope.formData.msg);

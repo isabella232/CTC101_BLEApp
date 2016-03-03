@@ -34,7 +34,8 @@ angular.module('bleTest.services', [])
     },
 
     onError: function(reason){
-      alert("error "+reason);
+      console.log("error: "+reason);
+      alert("error: "+reason)
     }
 
   };

@@ -2,7 +2,7 @@ angular.module('bleTest.controllers')
 
 
 .controller("Tamagotchi",function($scope, BleServices, BleDefs){
-  var tamagotchiService=BleDefs.tamagotchiService;
+  //var tamagotchiService=BleDefs.tamagotchiService;
   var uartService=BleDefs.uartService;
 
   var tags=["foodChari","playChari","cleanChari"];
@@ -14,7 +14,7 @@ angular.module('bleTest.controllers')
   function onConnect(peripheral){
     BleServices.startNotification(
       peripheral.id,
-      tamagotchiService.service,
+      uartService.service,
       uartService.txChari,
       onData);
   }
