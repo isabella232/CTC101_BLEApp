@@ -122,7 +122,7 @@ angular.module('bleTest.controllers',[])
     var stateToGo=_.get(_.head(_.values(service)),"state");
     //console.log(stateToGo);
     if(_.isUndefined(stateToGo)){
-      stateToGo="app.Test";
+      stateToGo=BleDefs.uartService.state;
     }
 
     $state.go(stateToGo).then(function(){

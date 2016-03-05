@@ -1,0 +1,16 @@
+<ion-view title="UART">
+	<ion-content>
+		<div id="editButtonContainer"><button class="button" ng-click="toggleEdit()">edit</div></div>
+		<div id="valueDisplayContainer" class="{{ editMode? 'editMode':'' }}">
+			<div class="valueDisplay" ng-repeat="valueDisplay in valueDisplays track by $index" ng-click="editValueDisplay($index)">
+				<h1>{{valueDisplay.title}}</h1>
+
+				<div class="content">{{valueDisplay.value}}</div>
+			</div>
+			<div class="addValueDisplay" ng-click="addNewValue()" ng-show="editMode">
+				<h1>Add New Value</h1>
+				<div class="content">+</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

@@ -45,6 +45,7 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     //cleanChari:"6ba3791d-bc31-4c7b-8a56-df1642fb698f"
   },
   uartService:{
+    state:"app.uart",
     service:"6E400001-B5A3-F393-E0A9-E50E24DCCA9E",
     txChari:"6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
     rxChari:"6E400002-B5A3-F393-E0A9-E50E24DCCA9E",
@@ -91,6 +92,15 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
       }
     }
   })
+  .state(BleDefs.uartService.state, {
+    url:"/uart",
+    views:{
+      "content":{
+        templateUrl: "templates/UARTTool.html",
+        controller:"UART"
+      }
+    }
+  })
   .state("app.welcome", {
     url:"/welcome",
     views:{
@@ -108,5 +118,8 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
     }
   });
 
-  $urlRouterProvider.otherwise('/app/welcome');
+  $urlRouterProvider.otherwise(
+    "app/uart"
+    //"app/welcome"
+  );
 })
