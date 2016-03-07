@@ -1,16 +1,47 @@
 <ion-view title="UART">
-	<ion-content>
-		<div id="editButtonContainer"><button class="button" ng-click="toggleEdit()">edit</div></div>
-		<div id="valueDisplayContainer" class="{{ editMode? 'editMode':'' }}">
-			<div class="valueDisplay" ng-repeat="valueDisplay in valueDisplays track by $index" ng-click="editValueDisplay($index)">
-				<h1>{{valueDisplay.title}}</h1>
 
-				<div class="content">{{valueDisplay.value}}</div>
-			</div>
-			<div class="addValueDisplay" ng-click="addNewValue()" ng-show="editMode">
-				<h1>Add New Value</h1>
-				<div class="content">+</div>
+	<ion-content ng-switch on="uartTabMode">
+
+		<div id="editButtonContainer"><button class="button" ng-click="toggleEdit()">edit</div></div>
+		
+		<div class="{{ editMode? 'editMode':'' }}" ng-switch-when="0" >
+			<div id="valueDisplayContainer"  >
+				<div class="valueDisplay" ng-repeat="valueDisplay in valueDisplays track by $index" ng-click="editValueDisplay($index)">
+					<h1>{{valueDisplay.title}}</h1>
+
+					<div class="content">{{valueDisplay.value}}</div>
+				</div>
+				<div class="addValueDisplay" ng-click="addNewValueDisplay()" ng-show="editMode">
+					<h1>Add New Value</h1>
+					<div class="content">+</div>
+				</div>
 			</div>
 		</div>
+
+		<div class="" ng-switch-when="1">
+			<div id="CustomControlContainer-up">
+				<div class="customControl button icon {{customControl.icon}} {{ editMode? 'button-outline':'' }}" ng-repeat="customControl in customControls.slice(0,4) track by $index" ng-click="customControlClicked($index)">
+				</div>
+			</div>
+			<div id="CustomControlContainer-down">
+				<div class="customControl button icon {{customControl.icon}} {{ editMode? 'button-outline':'' }}" ng-repeat="customControl in customControls.slice(4,8) track by $index" ng-click="customControlClicked($index+4)">
+				</div>
+			</div>
+		</div>
+
+
 	</ion-content>
+
+
+	<div class="tabs">
+		<a class="tab-item {{uartTabMode==0?'selected':''}}" ng-click="setTabMode(0)">
+			<!--		-->
+			Value Display
+		</a>
+		<a class="tab-item {{uartTabMode==1?'selected':''}}" ng-click="setTabMode(1)">
+			Custom Control
+		</a >
+	</div>
+
 </ion-view>
+

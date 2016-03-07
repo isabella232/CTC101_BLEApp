@@ -1,14 +1,29 @@
 angular.module("bleTest.controllers")
 
-.controller("UART",function($scope,$ionicPopup,BleServices,BleDefs){
+.controller("UART",function($scope,$ionicPopup,BleServices,UtilServices,BleDefs){
 	$scope.valueDisplays=[];
+	$scope.customControls=[];
+
 	$scope.editMode=false;
+	$scope.uartTabMode=0;
+
+
 
 	var uartService=BleDefs.uartService;
 
 	var numValueDisplays=0;
 
-	$scope.addNewValue=function(){
+	function init(){
+		$scope.addNewValueDisplay();
+		initCustomCommands();
+	}
+
+	/*
+	*	Value Display
+	*
+	*
+	*/
+	$scope.addNewValueDisplay=function(){
 		if(numValueDisplays>=20)return;
 
 		$scope.valueDisplays.push({
@@ -16,7 +31,7 @@ angular.module("bleTest.controllers")
 			value:0
 		});
 	}
-	$scope.addNewValue();
+	
 
 	$scope.toggleEdit=function(){
 		$scope.editMode=!$scope.editMode;
@@ -75,7 +90,108 @@ angular.module("bleTest.controllers")
 				$scope.valueDisplays[index].title=val;	
 			}
 		});
+	}
+
+
+
+	/*
+	*	Custom Commands
+	*
+	*
+	*/
+	function initCustomCommands(){
+		$scope.customControls=[
+			{
+				icon:"ion-arrow-up-c",
+				value:"1",
+			},
+			{
+				icon:"ion-arrow-left-c",
+				value:"2",
+			},
+			{
+				icon:"ion-arrow-down-c",
+				value:"3",
+			},
+			{
+				icon:"ion-arrow-right-c",
+				value:"4",
+			},
+			{
+				icon:"ion-checkmark-round",
+				value:"5",
+			},
+			{
+				icon:"ion-close-round",
+				value:"6",
+			},
+			{
+				icon:"ion-help",
+				value:"7",
+			},
+			{
+				icon:"ion-alert",
+				value:"8",
+			},
+		]
+	}
+	$scope.customControlClicked=function(index){
+		if($scope.editMode==false)
+			sendCommand(index);
+		else
+			editCustomControl(index);
 
 	}
+
+	function sendCommand(index){
+		var source=$scope.customControls[index];
+
+		console.log(source);
+
+		return;
+
+    var data=UtilServices.str2ab(source.value);
+    //console.log(this);
+  	BleServices.writeData(
+      $scope.peripheral.id, 
+      data, 
+      uartService.service,
+      uartService.rxChari
+    );
+ 	}
+
+ 	function editCustomControl(index){
+		$scope.custControlToEdit=_.clone($scope.customControls[index]);
+
+		var editCustomControlPopup=$ionicPopup.show({
+			template:
+				"icon:<input type='text' ng-model='custControlToEdit.icon'></input> \
+				value:<input type='text' ng-model='custControlToEdit.value'></input>",
+			title:"Edit Custom Control",
+			scope:$scope,
+			buttons:[
+				{text:'Cancel'},
+				{
+					text:'Save',
+					type:'button-positive',
+					onTap:function(e){
+						return $scope.custControlToEdit;
+					}
+				}
+			]
+		})
+		.then(function(val){
+			if(val){
+				$scope.customControls[index]=val;	
+			}
+		}); 	
+	}
+
+	$scope.setTabMode=function(mode){
+		$scope.uartTabMode=mode;
+	}
 	
+
+	init();
+
 })
