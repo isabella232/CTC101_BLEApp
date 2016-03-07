@@ -1,8 +1,19 @@
-<ion-view view-title="Tamagotchi">
+<ion-view view-title="Alien Baby" id="TamagotchiView">
     <ion-content>
-        <div class="progressBar" id="foodLV"><div class="inner" style="width:{{foodChari}}%;"></div></div>
-        <div class="progressBar" id="playLV"><div class="inner" style="width:{{playChari}}%;"></div></div>
-        <div class="progressBar" id="cleanLV"><div class="inner" style="width:{{cleanChari}}%;"></div></div>
+    	<div class="wrapper">
+	    	<div class="row">
+	        <div class="col col-xs-1 col-sm-1 col-md-1">Exercise: </div>
+	        <div class="progressBar col-xs-3 col-sm-4 col-md-9" id="foodLV"><div class="inner" style="width:{{foodChari}}%;"></div></div>
+	      </div>
+	    	<div class="row">
+	        <div class="col col-xs-1 col-sm-1 col-md-1">Food: </div>
+	        <div class="progressBar col-xs-3 col-sm-4 col-md-9" id="playLV"><div class="inner" style="width:{{playChari}}%;"></div></div>
+	      </div>
+	    	<div class="row">
+	        <div class="col col-xs-1 col-sm-1 col-md-1">Sleep: </div>
+	        <div class="progressBar col-xs-3 col-sm-4 col-md-9" id="cleanLV"><div class="inner" style="width:{{cleanChari}}%;"></div></div>
+	      </div>
+    	</div>
     </ion-content>
 
 </ion-view>

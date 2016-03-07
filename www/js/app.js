@@ -119,7 +119,8 @@ angular.module('bleTest', ['ionic', 'bleTest.controllers', 'bleTest.services'])
   });
 
   $urlRouterProvider.otherwise(
-    "app/uart"
+    //"app/uart"
     //"app/welcome"
+    "app/tamagotchi"
   );
 })

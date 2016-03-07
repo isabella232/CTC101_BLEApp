@@ -21,35 +21,115 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+body{
+	color:#333;
+}
+
+/*
+* Welcome View
+*
+*
+*/
+.welcomeText{
+	text-align:center;
+	font-size:1.1em;
+	margin:auto;
+
+	&.wt1{
+		width:300px;
+		padding-bottom:50px;
+	};
+
+	&.wt2{
+		width:220px;
+		padding-bottom:20px;
+	};
+
+	&.wt3{
+		width:125px;
+		text-align:left;
+		list-style:disc inside;
+	};
+}
+
+.welcomeImg{
+	font-size:4em;
+	margin:auto;
+	padding:50px 0 30px 0;
+	width:1em;
+
+}
+
+/*
+*	Alien Baby
+*
+*
+*/
+$red:#F52D1D;
+$blue:#224CA4;
+$green:#DFF11D;
+
+#TamagotchiView .wrapper{
+	padding-top:40px;
+	width:83%;
+	margin:auto;
+}
+#TamagotchiView .row{
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+@media screen and (max-width:768px){
+	.col-xs-3{
+		//@extend %col-75-d
+		width:75%;
+	}
+}
+
+@media screen and (min-width:768px){
+	.col-sm-1{
+		//@extend %col-20-d
+		width:20%;
+	}
+	.col-sm-4{
+		//@extend %col-80-d
+		width:80%;
+
+	}	
+}
+
+@media screen and (min-width:992px){
+	.col-md-1{
+		//@extend %col-10-d
+		width:10%;
+
+	}
+	.col-md-9{
+		//@extend %col-90-d
+		width:90%;
+	}	
+}
 .progressBar{
-	border:1px solid;
 	height:30px;
-	margin:10px 0;
-	padding:2px;
+	background-color:#EEE;
+
+	.inner{
+		height:100%;
+	}
+	&#foodLV .inner{
+		background-color:$red;
+	}
+	&#playLV .inner{
+		background-color:$green;
+	}
+	&#cleanLV .inner{
+		background-color:$blue;
+	}
 }
 
-.progressBar#foodLV{
-	border-color:red;
-}
-.progressBar#playLV{
-	border-color:green;
-}
-.progressBar#cleanLV{
-	border-color:blue;
-}
 
-.progressBar .inner{
-	height:100%;
-}
-.progressBar#foodLV .inner{
-	background-color:red;
-}
-.progressBar#playLV .inner{
-	background-color:green;
-}
-.progressBar#cleanLV .inner{
-	background-color:blue;
-}
+
+
 
 
 .editMode .valueDisplay{
