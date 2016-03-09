@@ -21,9 +21,16 @@ angular.module("bleTest.controllers")
 	}
 
 	$scope.sendCmd=function(){
-		var cmdString=_.join(_.map($scope.logoCommands,"code"),"");
+		/*var cmdString=_.join(_.map($scope.logoCommands,"code"),"");
 		console.log(cmdString);
-		var data=UtilServices.str2ab(cmdString);
+		var data=UtilServices.str2ab(cmdString);*/
+		var cmdArray=_.concat([],_.map($scope.logoCommands,"code"));
+		//console.log(cmdArray);
+		var data=new ArrayBuffer(cmdArray.length);
+		var bufView=new Uint8Array(data);
+		bufView.set(cmdArray);
+		//console.log(bufView);
+  	
   	BleServices.writeData(
   		$scope.peripheral.id, 
   		data, 

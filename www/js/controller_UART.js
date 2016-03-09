@@ -107,31 +107,31 @@ angular.module("bleTest.controllers")
 			},
 			{
 				icon:"ion-arrow-left-c",
-				value:"2",
+				value:2,
 			},
 			{
 				icon:"ion-arrow-down-c",
-				value:"3",
+				value:3,
 			},
 			{
 				icon:"ion-arrow-right-c",
-				value:"4",
+				value:4,
 			},
 			{
 				icon:"ion-checkmark-round",
-				value:"5",
+				value:5,
 			},
 			{
 				icon:"ion-close-round",
-				value:"6",
+				value:6,
 			},
 			{
 				icon:"ion-help",
-				value:"7",
+				value:7,
 			},
 			{
 				icon:"ion-alert",
-				value:"8",
+				value:8,
 			},
 		]
 	}
@@ -146,11 +146,11 @@ angular.module("bleTest.controllers")
 	function sendCommand(index){
 		var source=$scope.customControls[index];
 
-		console.log(source);
+		var data=new ArrayBuffer(1);
+		var bufView=new Uint8Array(data);
+		bufView[0]=source.value;
 
-		return;
-
-    var data=UtilServices.str2ab(source.value);
+    //var data=UtilServices.str2ab(source.value);
     //console.log(this);
   	BleServices.writeData(
       $scope.peripheral.id, 
@@ -165,7 +165,7 @@ angular.module("bleTest.controllers")
 
 		var editCustomControlPopup=$ionicPopup.show({
 			template:
-				"icon:<input type='text' ng-model='custControlToEdit.icon'></input> \
+				"<!--icon:<input type='text' ng-model='custControlToEdit.icon'></input>--> \
 				value:<input type='text' ng-model='custControlToEdit.value'></input>",
 			title:"Edit Custom Control",
 			scope:$scope,
@@ -181,10 +181,21 @@ angular.module("bleTest.controllers")
 			]
 		})
 		.then(function(val){
-			if(val){
+			val.value=Number(val.value);
+			var numVal=val.value;
+			if(!isNaN(numVal) && numVal===parseInt(numVal,10) && numVal>0 && numVal<255){
 				$scope.customControls[index]=val;	
+			}else{
+				editCustomControlAlert();
 			}
 		}); 	
+	}
+	function editCustomControlAlert(){
+	   var alertPopup = $ionicPopup.alert({
+	     title: 'Invalid value',
+	     template: 'Please use a integer between, and including 0 and 255'
+	   });
+
 	}
 
 	$scope.setTabMode=function(mode){
