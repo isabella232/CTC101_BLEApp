@@ -1,4 +1,4 @@
-<ion-view title="Logo Robot">
+<ion-view title="Logo Robot" id="LogoRobot">
 	<ion-content>
 		<div id="logo-commands">
 			<span class="logo-command ion-arrow-{{cmd.name}}-c" ng-repeat="cmd in logoCommands">
@@ -6,12 +6,12 @@
 			</span>
 		</div>
 		<div class="logo-controls">
-			<button class="button icon ion-arrow-up-c" ng-click="addCmd('up')"></button>
-			<button class="button icon ion-arrow-down-c" ng-click="addCmd('down')"></button>
-			<button class="button icon ion-arrow-left-c" ng-click="addCmd('left')"></button>
-			<button class="button icon ion-arrow-right-c" ng-click="addCmd('right')"></button>
-			<button class="button icon ion-checkmark-round" ng-click="sendCmd()"></button>
-			<button class="button icon ion-backspace" ng-click="backspace(1)"></button>		
+			<button class="button base secondary icon ion-arrow-up-c" ng-click="addCmd('up')"></button>
+			<button class="button base secondary icon ion-arrow-down-c" ng-click="addCmd('down')"></button>
+			<button class="button base secondary icon ion-arrow-left-c" ng-click="addCmd('left')"></button>
+			<button class="button base secondary icon ion-arrow-right-c" ng-click="addCmd('right')"></button>
+			<button class="button base secondary icon ion-checkmark-round" ng-click="sendCmd()"></button>
+			<button class="button base secondary icon ion-backspace" ng-click="backspace(1)"></button>		
 		</div>
 	</ion-content>
 </ion-view>

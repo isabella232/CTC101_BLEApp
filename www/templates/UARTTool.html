@@ -2,7 +2,7 @@
 
 	<ion-content ng-switch on="uartTabMode">
 
-		<div id="editButtonContainer"><button class="button icon ion-gear-a" ng-click="toggleEdit()"></div></div>
+		<div id="editButtonContainer"><button class="button base secondary icon ion-gear-a" ng-click="toggleEdit()"></div></div>
 		
 		<div class="{{ editMode? 'editMode':'' }}" ng-switch-when="0" >
 			<div id="valueDisplayContainer"  >
@@ -21,28 +21,28 @@
 		<div class="{{ editMode? 'editMode':'' }}" ng-switch-when="1">
 			<div id="CustomControlContainer">
 				<div class="row">
-					<div class="customControl button icon {{customControls[0].icon}} " ng-click="customControlClicked(0)">
-					</div>
+					<button class="customControl button base secondary icon {{customControls[0].icon}} " ng-click="customControlClicked(0)">
+					</button>
 				</div>
 
 				<div class="row">
-					<div class="customControl button icon {{customControls[1].icon}} " ng-click="customControlClicked(1)">
-					</div>
-					<div class="customControl button icon {{customControls[2].icon}} " ng-click="customControlClicked(2)">
-					</div>
-					<div class="customControl button icon {{customControls[3].icon}} " ng-click="customControlClicked(3)">
-					</div>
+					<button class="customControl button base secondary icon {{customControls[1].icon}} " ng-click="customControlClicked(1)">
+					</button>
+					<button class="customControl button base secondary icon {{customControls[2].icon}} " ng-click="customControlClicked(2)">
+					</button>
+					<button class="customControl button base secondary icon {{customControls[3].icon}} " ng-click="customControlClicked(3)">
+					</button>
 				</div>
 
 				<div class="row">
-					<div class="customControl button icon {{customControls[4].icon}} " ng-click="customControlClicked(4)">
-					</div>
-					<div class="customControl button icon {{customControls[5].icon}} " ng-click="customControlClicked(5)">
-					</div>
-					<div class="customControl button icon {{customControls[6].icon}} " ng-click="customControlClicked(6)">
-					</div>
-					<div class="customControl button icon {{customControls[7].icon}} " ng-click="customControlClicked(7)">
-					</div>
+					<button class="customControl button base secondary icon {{customControls[4].icon}} " ng-click="customControlClicked(4)">
+					</button>
+					<button class="customControl button base secondary icon {{customControls[5].icon}} " ng-click="customControlClicked(5)">
+					</button>
+					<button class="customControl button base secondary icon {{customControls[6].icon}} " ng-click="customControlClicked(6)">
+					</button>
+					<button class="customControl button base secondary icon {{customControls[7].icon}} " ng-click="customControlClicked(7)">
+					</button>
 				</div>
 			</div>
 		</div>

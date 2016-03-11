@@ -15,11 +15,17 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$positive:                        #17979C !default;
+$positive_dark:										#005c5f !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+@import "www/css/button";
+
+
 
 body{
 	color:#333;
@@ -27,6 +33,11 @@ body{
 
 .main ion-content{
 	padding:10px;
+}
+
+button.base{
+	padding:0 8px;
+	line-height:42px;
 }
 /*
 * Welcome View
@@ -134,21 +145,39 @@ $green:#DFF11D;
 		background-color:$blue;
 	}
 }
+/*
+*	Rover
+*
+*
+*/
+#LogoRobot{
 
+
+	button{
+		margin-right:0;
+	}
+}
 /*
 *	Messenger
 *
 *
 */
-#MessengerView #dataDisplay{
-	margin:10px 0 18px 0;
-	&.empty{
-		color:#ccc;
+#MessengerView{
+
+
+	#dataDisplay{
+		margin:10px 0 18px 0;
+		&.empty{
+			color:#ccc;
+		} 
 	}
 
-}
-#MessengerView #statusDiv{
-	margin:10px 0;
+ #statusDiv{
+		margin:10px 0;
+	}
+ button{
+		margin:10px 0;
+	}
 }
 
 /*
@@ -177,6 +206,7 @@ $green:#DFF11D;
 	padding:10px;
 	text-align:center;
 	position:relative;
+	transition: all ease-out .1s;
 }
 #valueDisplayContainer h1{
 	height:2em;
