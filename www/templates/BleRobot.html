@@ -1,11 +1,15 @@
-<ion-view title="Logo Robot" id="LogoRobot">
+<ion-view title="Space Rover" id="LogoRobot">
 	<ion-content>
-		<div id="logo-commands">
-			<span class="logo-command ion-arrow-{{cmd.name}}-c" ng-repeat="cmd in logoCommands">
+		Add directions with arrow buttons, and send with tick button. 
+		<div id="logoCommands">
+			<span class="logoCommand ion-arrow-{{cmd.name}}-c" ng-repeat="cmd in logoCommands">
 				
 			</span>
+			<span class="logoCommand">
+				_
+			</span>
 		</div>
-		<div class="logo-controls">
+		<div id="logoControls">
 			<button class="button base secondary icon ion-arrow-up-c" ng-click="addCmd('up')"></button>
 			<button class="button base secondary icon ion-arrow-down-c" ng-click="addCmd('down')"></button>
 			<button class="button base secondary icon ion-arrow-left-c" ng-click="addCmd('left')"></button>

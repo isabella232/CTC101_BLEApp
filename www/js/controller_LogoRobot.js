@@ -16,8 +16,11 @@ angular.module("bleTest.controllers")
 
 	$scope.addCmd=function(cmd){
 		cleanupCmds();
-		var cmdCode=commandList[cmd];
-		$scope.logoCommands.push({name:cmd,code:cmdCode});
+
+		if($scope.logoCommands.length<20){
+			var cmdCode=commandList[cmd];
+			$scope.logoCommands.push({name:cmd,code:cmdCode});
+		}
 	}
 
 	$scope.sendCmd=function(){
