@@ -1,10 +1,10 @@
-<ion-view title="UART">
+<ion-view title="UART" id="uart">
 
-	<ion-content ng-switch on="uartTabMode">
+	<ion-content ng-switch on="uartTabMode" >
 
-		<div id="editButtonContainer"><button class="button base secondary icon ion-gear-a" ng-click="toggleEdit()"></div></div>
+		<div id="editButtonContainer" class="uartTab-{{uartTabMode}}"><button class="button base secondary icon ion-gear-a" ng-click="toggleEdit()"></button></div>
 		
-		<div class="{{ editMode? 'editMode':'' }}" ng-switch-when="0" >
+		<div class="tabContainer {{ editMode? 'editMode':'' }}" ng-switch-when="0" >
 			<div id="valueDisplayContainer"  >
 				<div class="valueDisplay" ng-repeat="valueDisplay in valueDisplays track by $index" ng-click="editValueDisplay($index)">
 					<h1>{{valueDisplay.title}}</h1>
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 
-		<div class="{{ editMode? 'editMode':'' }}" ng-switch-when="1">
+		<div class="tabContainer {{ editMode? 'editMode':'' }}" ng-switch-when="1">
 			<div id="CustomControlContainer">
 				<div class="row">
 					<button class="customControl button base secondary icon {{customControls[0].icon}} " ng-click="customControlClicked(0)">
