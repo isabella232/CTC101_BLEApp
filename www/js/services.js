@@ -1,6 +1,9 @@
 angular.module('bleTest.services', [])
 .factory("BleServices",function(){
   var app={
+    enable:function(onEnable){
+      ble.enable(onEnable,this.onError);
+    },
     scan: function(onScan) {
       this.status("Scanning for Heart Rate Monitor");
 

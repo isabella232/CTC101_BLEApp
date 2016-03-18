@@ -27,8 +27,10 @@ angular.module('bleTest.controllers',[])
   $scope.connectClicked=function(){
     if(_.isUndefined($scope.peripheral)){
       $scope.bles=[];
-      BleServices.scan(onScan);
-      $scope.openBleModal();
+      BleServices.enable(function(){
+        BleServices.scan(onScan);
+        $scope.openBleModal();
+      });
     }else{
       //console.log("disconnect");
       disconnectDevice();
