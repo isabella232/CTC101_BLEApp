@@ -4,8 +4,8 @@
   <description>
         Tools used together with CTC project Block 5 Advanced Technologies
     </description>
-  <author href="https://github.com/arduinoverkstad">
-        Xun Yang - Arduino Verkstad
+  <author href="https://github.com/arduino">
+        Xun Yang - Arduino LLC
     </author>
   <content src="index.html"/>
   <access origin="*"/>
